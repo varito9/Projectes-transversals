@@ -1,0 +1,12 @@
+T3: Joc per endevinar endevinar banderes de paisos  (1 pregunta amb 1 imatge, 4 respostes)
+J2:
+
+"preguntes": 
+    {
+      "pregunta": "Quina marca de cotxes utilitza el lema 'Ultimate Driving Machine'?",
+      "resposta_correcta": "BMW",
+      "respostes_incorrectes": ["Mercedes-Benz", "Audi", "Lexus"],
+      "imatge": "https://exemple.com/bmw.jpg"
+    }
+
+F2: Has de respondre 10 preguntes. Es porta un recompte del temps que trigues en acabar.

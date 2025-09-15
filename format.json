@@ -1,0 +1,10 @@
+{
+  "preguntes": [
+    {
+      "pregunta": "Quina marca de cotxes utilitza el lema 'Ultimate Driving Machine'?",
+      "resposta_correcta": "BMW",
+      "respostes_incorrectes": ["Mercedes-Benz", "Audi", "Lexus"],
+      "imatge": "https://exemple.com/bmw.jpg"
+    }
+  ]
+}
