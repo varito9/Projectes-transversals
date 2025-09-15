@@ -1,4 +1,4 @@
-{
+export default {
   "preguntes": [
     {
       "pregunta": "Quina marca de cotxes utilitza el lema 'Ultimate Driving Machine'?",
@@ -8,3 +8,5 @@
     }
   ]
 }
+ git config --global user.email "alvarosaldanaaa@gmail.com"
+  git config --global user.name "Alvaro"
