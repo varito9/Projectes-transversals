@@ -8,5 +8,3 @@ export default {
     }
   ]
 }
- git config --global user.email "alvarosaldanaaa@gmail.com"
-  git config --global user.name "Alvaro"
