@@ -5,7 +5,7 @@ let contenidor=document.getElementById("questionari");
 
 htmlString="";
 
-for(let i = 0; i< data.preguntes.lenght; i++){
+for(let i = 0; i< data.preguntes.length; i++){
     htmlString += `<h3> ${data.preguntes[i].pregunta}</h3>`;
 
 }
