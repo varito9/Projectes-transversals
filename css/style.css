@@ -10,5 +10,11 @@ button{
     margin-left: 1rem;
     padding: 10px; 
     border-radius: 20px;
-    border-color: teal;
+}
+button:hover{
+    transition: 500ms;
+    background-color: moccasin;
+    padding: 1rem;
+    border-color: gold;
+    border-width: 2rem;
 }
