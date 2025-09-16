@@ -25,7 +25,7 @@ export default {
       "imatge": "https://example.com/flags/india.png"
     },
     {
-      "pregunta": "Quin país té com a capital Ottawa?",
+      "pregunta": "De quin país és aquesta bandera?",
       "resposta_correcta": "Canadà",
       "respostes_incorrectes": ["Dinamarca", "Suïssa", "Noruega"],
       "imatge": "https://example.com/flags/canada.png"
@@ -37,9 +37,9 @@ export default {
       "imatge": "https://example.com/flags/sud_africa.png"
     },
     {
-      "pregunta": "Quin país té com a capital Pequín (Beijing)?",
-      "resposta_correcta": "Xina",
-      "respostes_incorrectes": ["Vietnam", "Corea del Nord", "Singapur"],
+      "pregunta": "De quin país és aquesta bandera?",
+      "resposta_correcta": "Vietnam",
+      "respostes_incorrectes": ["Xina", "Corea del Nord", "Singapur"],
       "imatge": "https://example.com/flags/xina.png"
     },
     {
@@ -50,13 +50,13 @@ export default {
     },
     {
       "pregunta": "De quin país és aquesta bandera?",
-      "resposta_correcta": "Sud-àfrica",
-      "respostes_incorrectes": ["Zàmbia", "Namíbia", "Botswana"],
-      "imatge": "https://example.com/flags/sud_africa.png"
+      "resposta_correcta": "Suècia",
+      "respostes_incorrectes": ["Finlàndia", "Noruega", "Dinamarca"],
+      "imatge": "https://example.com/flags/suecia.png"
     },
 
     {
-      "pregunta": "Quin país té com a capital Ankara?",
+      "pregunta": "De quin país és aquesta bandera?",
       "resposta_correcta": "Turquia",
       "respostes_incorrectes": ["Tunísia", "Azerbaidjan", "Marroc"],
       "imatge": "https://example.com/flags/turquia.png"
