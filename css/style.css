@@ -1,0 +1,11 @@
+.bandera{
+    height: auto;
+    width: 270px;
+    margin-bottom: 2rem; 
+    border: 1px solid black;
+    margin-left: 2rem; 
+}
+
+button{
+    margin-right: 1rem;
+}
