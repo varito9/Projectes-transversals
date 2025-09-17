@@ -1,4 +1,10 @@
-import data from'./data.js';
+function actualitzarMarcador(){
+let marcador = document.getElementById("marcador");
+marcador.innerHTML = `Pregunta ${estatDeLaPartida.contadorPreguntes} Respostes ${estatDeLaPartida}`
+}
+
+
+
 
 function marcarRespuesta(numPregunta, numRespuesta) {
     console.log("Pregunta " + numPregunta + "Resposta " + numRespuesta);
