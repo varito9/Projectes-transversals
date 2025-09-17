@@ -9,9 +9,9 @@ window.marcarRespuesta = marcarRespuesta;
 
 
 
+function renderJuego(data){
 
-//alert("hola")
-console.log(data);
+// console.log(data);
 
 let contenidor = document.getElementById("questionari");
 let htmlString = "";
@@ -29,6 +29,17 @@ for (let i = 0; i < data.preguntes.length; i++) {
 
     for (let j = 0; j < respostes.length; j++) {
         htmlString += `<button onclick="marcarRespuesta(${i+1}, ${j+1})">${respostes[j]}</button>`;
+        }
     }
+    contenidor.innerHTML=htmlString;
 }
-contenidor.innerHTML=htmlString;
+
+
+window.addEventListener('DOMContentLoaded', (event) =>{
+
+
+fetch('js/data.json')
+  .then(response => response.json())
+  .then(preg => console.log(preg));
+
+})
