@@ -1,57 +1,73 @@
-import data from'./data.js';
+// 👇 Estado de la partida
+let estatDeLaPartida = { 
+    contadorPreguntes: 0, 
+    respostesUsuari: [] 
+};
 
 
-
-function actualitzarMarcador(){
-let marcador = document.getElementById("marcador");
-marcador.innerHTML = `Pregunta ${estatDeLaPartida.contadorPreguntes} Respostes ${estatDeLaPartida}`
+function actualitzarMarcador() {
+    let marcador = document.getElementById("marcador");
+    marcador.innerHTML = `Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}`;
 }
-
-
 
 
 function marcarRespuesta(numPregunta, numRespuesta) {
-    console.log("Pregunta " + numPregunta + "Resposta " + numRespuesta);
-    
+    console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
+
+    if (!estatDeLaPartida.respostesUsuari[numPregunta - 1]) {
+        estatDeLaPartida.contadorPreguntes++;
+    }
+
+    estatDeLaPartida.respostesUsuari[numPregunta - 1] = numRespuesta;
+
+    actualitzarMarcador();
+
+    if (estatDeLaPartida.contadorPreguntes === estatDeLaPartida.totalPreguntes) {
+        document.getElementById("btnResultats").classList.remove("hidden");
+    }
 }
-window.marcarRespuesta = marcarRespuesta;
 
 
+function renderJuego(data) {
+    let contenidor = document.getElementById("partida");
+    let htmlString = "";
 
+    estatDeLaPartida.totalPreguntes = data.preguntes.length;
 
-function renderJuego(data){
+    for (let i = 0; i < data.preguntes.length; i++) {
+        htmlString += `<h3>${data.preguntes[i].pregunta}</h3>`;
+        htmlString += `<img class='bandera' src="${data.preguntes[i].imatge}" alt="imatge pregunta ${i+1}"><br>`;
 
-    console.log(data);
+        let respostes = [data.preguntes[i].resposta_correcta, ...data.preguntes[i].respostes_incorrectes];
+        respostes.sort(() => Math.random() - 0.5);
 
-let contenidor = document.getElementById("questionari");
-let htmlString = "";
-
-for (let i = 0; i < data.preguntes.length; i++) {
-    htmlString += `<h3>${data.preguntes[i].pregunta}</h3>`;
-    htmlString += `<img class='bandera' src="${data.preguntes[i].imatge}" alt="imatge pregunta ${i+1}"><br>`;
-
-    
-    //operador spread combina arrays y strings 
-    let respostes = [data.preguntes[i].resposta_correcta, ...data.preguntes[i].respostes_incorrectes];
-    
-    // Mezclar todas las preguntas para que no esten siempre en la misma posición
-    respostes.sort(() => Math.random() - 0.5);
-
-    for (let j = 0; j < respostes.length; j++) {
-        htmlString += `<button onclick="marcarRespuesta(${i+1}, ${j+1})">${respostes[j]}</button>`;
+        for (let j = 0; j < respostes.length; j++) {
+            // 👇 en vez de onclick, le damos atributos data-* y una clase
+            htmlString += `<button class="resposta" data-pregunta="${i+1}" data-resposta="${j+1}">${respostes[j]}</button>`;
         }
     }
-    contenidor.innerHTML=htmlString;
+    contenidor.innerHTML = htmlString;
 }
 
-renderJuego(data);
-window.addEventListener('DOMContentLoaded', (event) =>{
 
-    fetch('http://a24alvsalalv.daw.inspedralbes.cat/2DAW/Proj/js/data.json')
-    .then(response => response.json())
-    .then(preg => {
-        console.log("Preguntes carregades:", preg);
-        renderJuego(preg); // 👈 ARA sí cridem a la funció que pinta el joc
-    })
-    .catch(error => console.error("Error carregant el JSON:", error));
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('./js/data.json') 
+        .then(response => {
+            if (!response.ok) throw new Error("Error al cargar data.json");
+            return response.json();
+        })
+        .then(data => {
+            renderJuego(data);
+            actualitzarMarcador();
+        })
+        .catch(err => console.error(err));
+
+    // 👇 Delegación de eventos: un solo listener en el div principal
+    document.getElementById("partida").addEventListener("click", (event) => {
+        if (event.target.classList.contains("resposta")) {
+            let numPregunta = parseInt(event.target.dataset.pregunta);
+            let numRespuesta = parseInt(event.target.dataset.resposta);
+            marcarRespuesta(numPregunta, numRespuesta);
+        }
+    });
 });

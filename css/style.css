@@ -18,3 +18,7 @@ button:hover{
     border-color: gold;
     border-width: 2rem;
 }
+
+.hidden {
+  display: none;
+}

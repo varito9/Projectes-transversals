@@ -10,3 +10,23 @@ J2:
     }
 
 F2: Has de respondre 10 preguntes. Es porta un recompte del temps que trigues en acabar.
+
+
+
+
+let estatDeLaPartida = { 
+
+contadorPreguntes: 0, 
+
+respostesUsuari: [] // Aquí anirem guardant les respostes 
+
+}; 
+
+
+function renderitzarMarcador(){
+
+
+}
+
+
+
