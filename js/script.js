@@ -1,3 +1,7 @@
+import data from'./data.js';
+
+
+
 function actualitzarMarcador(){
 let marcador = document.getElementById("marcador");
 marcador.innerHTML = `Pregunta ${estatDeLaPartida.contadorPreguntes} Respostes ${estatDeLaPartida}`
@@ -17,7 +21,7 @@ window.marcarRespuesta = marcarRespuesta;
 
 function renderJuego(data){
 
-// console.log(data);
+    console.log(data);
 
 let contenidor = document.getElementById("questionari");
 let htmlString = "";
@@ -40,12 +44,14 @@ for (let i = 0; i < data.preguntes.length; i++) {
     contenidor.innerHTML=htmlString;
 }
 
-
+renderJuego(data);
 window.addEventListener('DOMContentLoaded', (event) =>{
 
-
-fetch('js/data.json')
-  .then(response => response.json())
-  .then(preg => console.log(preg));
-
-})
+    fetch('http://a24alvsalalv.daw.inspedralbes.cat/2DAW/Proj/js/data.json')
+    .then(response => response.json())
+    .then(preg => {
+        console.log("Preguntes carregades:", preg);
+        renderJuego(preg); // 👈 ARA sí cridem a la funció que pinta el joc
+    })
+    .catch(error => console.error("Error carregant el JSON:", error));
+});

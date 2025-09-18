@@ -1,0 +1,66 @@
+{
+    "preguntes": [
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Japó",
+        "respostes_incorrectes": ["Xina", "Corea del Sud", "Bangla Desh"],
+        "imatge": "img/japon.png"
+      },
+      {
+        "pregunta": "Quin país té com a capital Canberra?",
+        "resposta_correcta": "Austràlia",
+        "respostes_incorrectes": ["Nova Zelanda", "Fiji", "Estats Units"],
+        "imatge": "/img/australia.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Noruega",
+        "respostes_incorrectes": ["Islàndia", "Suècia", "Finlàndia"],
+        "imatge": "/img/norway.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Índia",
+        "respostes_incorrectes": ["BanglaDesh", "Sri Lanka", "Pakistan"],
+        "imatge": "/img/india.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Canadà",
+        "respostes_incorrectes": ["Dinamarca", "Suïssa", "Noruega"],
+        "imatge": "/img/canada.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Sud-àfrica",
+        "respostes_incorrectes": ["Zàmbia", "Namíbia", "Botswana"],
+        "imatge": "/img/sudafrica.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Vietnam",
+        "respostes_incorrectes": ["Xina", "Corea del Nord", "Singapur"],
+        "imatge": "/img/vietnam.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Aràbia Saudita",
+        "respostes_incorrectes": ["Jordània", "Emirats Àrabs Units", "Kuwait"],
+        "imatge": "/img/arabiasaudi.png"
+      },
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Suècia",
+        "respostes_incorrectes": ["Finlàndia", "Noruega", "Dinamarca"],
+        "imatge": "/img/suecia.png"
+      },
+  
+      {
+        "pregunta": "De quin país és aquesta bandera?",
+        "resposta_correcta": "Turquia",
+        "respostes_incorrectes": ["Tunísia", "Azerbaidjan", "Marroc"],
+        "imatge": "/img/turquia.png"
+      }
+    ]
+  }
+  
