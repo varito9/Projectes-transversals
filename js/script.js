@@ -1,4 +1,3 @@
-// 👇 Estado de la partida
 let estatDeLaPartida = { 
     contadorPreguntes: 0, 
     respostesUsuari: [] 
@@ -42,7 +41,6 @@ function renderJuego(data) {
         respostes.sort(() => Math.random() - 0.5);
 
         for (let j = 0; j < respostes.length; j++) {
-            // 👇 en vez de onclick, le damos atributos data-* y una clase
             htmlString += `<button class="resposta" data-pregunta="${i+1}" data-resposta="${j+1}">${respostes[j]}</button>`;
         }
     }
@@ -62,7 +60,6 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => console.error(err));
 
-    // 👇 Delegación de eventos: un solo listener en el div principal
     document.getElementById("partida").addEventListener("click", (event) => {
         if (event.target.classList.contains("resposta")) {
             let numPregunta = parseInt(event.target.dataset.pregunta);
