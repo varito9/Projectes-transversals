@@ -26,7 +26,6 @@ function marcarRespuesta(numPregunta, numRespuesta) {
     }
 }
 
-
 function renderJuego(data) {
     let contenidor = document.getElementById("partida");
     let htmlString = "";
