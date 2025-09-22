@@ -6,15 +6,12 @@ let estatDeLaPartida = {
 
 let preguntesGuardades = [];
 
-
-
-
 function actualitzarMarcador() {
   let marcador = document.getElementById("marcador");
   marcador.innerHTML = `Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}`;
 }
 
-function marcarRespuesta(numPregunta, numRespuesta, data) {
+function marcarRespuesta(numPregunta, numRespuesta) {
   console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
 
   if (estatDeLaPartida.respostesUsuari[numPregunta - 1] === undefined) {
