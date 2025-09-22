@@ -12,14 +12,12 @@ button{
     border-radius: 20px;
     margin-bottom: 2rem;
 }
-button:hover{
-    transition: 500ms;
-    background-color: moccasin;
-    padding: 0.5rem;
-    border-color: gold;
-    border-width: 1rem;
-}
+
 
 .hidden {
   display: none;
+}
+
+.resposta.seleccionada {
+    background:lightgreen
 }

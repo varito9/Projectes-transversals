@@ -5,6 +5,7 @@ let estatDeLaPartida = {
 };
 
 let preguntesGuardades = [];
+let numPreguntaActual = 0;
 
 function actualitzarMarcador() {
   let marcador = document.getElementById("marcador");
@@ -20,59 +21,88 @@ function marcarRespuesta(numPregunta, numRespuesta) {
 
   estatDeLaPartida.respostesUsuari[numPregunta - 1] = numRespuesta;
 
-
   let pregunta = preguntesGuardades[numPregunta - 1];
   let respuestaSeleccionada = pregunta.respostes[numRespuesta - 1];
 
   if (respuestaSeleccionada === pregunta.correcta) {
     console.log("Resposta correcta");
-    }
-  else {
+  } else {
     console.log("Resposta incorrecta");
   }
 
-
   //https://github.com/alvaroph/tr0_daw
 
-  
   actualitzarMarcador();
+
+  renderPreguntaActual();
 
   if (estatDeLaPartida.contadorPreguntes === estatDeLaPartida.totalPreguntes) {
     document.getElementById("btnResultats").classList.remove("hidden");
   }
 }
 
-function renderJuego(data) {
+function renderPreguntaActual() {
   let contenidor = document.getElementById("partida");
+  let pregunta = preguntesGuardades[numPreguntaActual];
   let htmlString = "";
 
+  htmlString = `<h3>${numPreguntaActual + 1}. ${pregunta.pregunta}</h3>`;
+  htmlString += `<img class="bandera" src="${pregunta.imatge}" alt="imatge pregunta"><br>`;
+
+  for (let j = 0; j < pregunta.respostes.length; j++) {
+    let seleccionada =
+      estatDeLaPartida.respostesUsuari[numPreguntaActual] === j + 1
+        ? "seleccionada"
+        : "";
+
+    htmlString += `<button class="resposta ${seleccionada}" data-pregunta="${
+      numPreguntaActual + 1
+    }" data-resposta="${j + 1}">${pregunta.respostes[j]}</button>`;
+  }
+
+  htmlString += `<div class="navegacion">`;
+  if (numPreguntaActual > 0) {
+    htmlString += `<button id="atras">⬅️ Enrere</button>`;
+  }
+  if (numPreguntaActual < estatDeLaPartida.totalPreguntes - 1) {
+    htmlString += `<button id="adelante">➡️ Davant</button>`;
+  }
+  htmlString += `</div>`;
+
+  contenidor.innerHTML = htmlString;
+
+  if (document.getElementById("atras")) {
+    document.getElementById("atras").addEventListener("click", () => {
+      numPreguntaActual--;
+      renderPreguntaActual();
+    });
+  }
+  if (document.getElementById("adelante")) {
+    document.getElementById("adelante").addEventListener("click", () => {
+      numPreguntaActual++;
+      renderPreguntaActual();
+    });
+  }
+}
+
+function renderJuego(data) {
   estatDeLaPartida.totalPreguntes = data.preguntes.length;
 
   for (let i = 0; i < data.preguntes.length; i++) {
-    htmlString += `<h3>${data.preguntes[i].pregunta}</h3>`;
-    htmlString += `<img class="bandera" src="${
-      data.preguntes[i].imatge
-    }" alt="imatge pregunta ${i + 1}"><br>`;
-
     let respostes = [
       data.preguntes[i].resposta_correcta,
       ...data.preguntes[i].respostes_incorrectes,
     ];
     respostes.sort(() => Math.random() - 0.5);
 
-
     preguntesGuardades[i] = {
       respostes: respostes,
-      correcta: data.preguntes[i].resposta_correcta
+      imatge: data.preguntes[i].imatge,
+      correcta: data.preguntes[i].resposta_correcta,
+      pregunta: data.preguntes[i].pregunta,
     };
-
-    for (let j = 0; j < respostes.length; j++) {
-      htmlString += `<button class="resposta" data-pregunta="${
-        i + 1
-      }" data-resposta="${j + 1}">${respostes[j]}</button>`;
-    }
   }
-  contenidor.innerHTML = htmlString;
+  renderPreguntaActual();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
