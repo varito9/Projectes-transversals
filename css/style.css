@@ -3,9 +3,6 @@
     width: 270px;
     margin-bottom: 2rem; 
     border: 1px solid black;
-    margin-left: 2rem; 
-
-
 }
 
 
@@ -14,13 +11,23 @@ h3{
     text-align: center;
 }
 
-.margen{
+.margen-bandera{
+    margin-top: 2rem;
+    display: flex;
     align-items: center;
-    
+    justify-content: center;
 }
 
+.margen-boton{
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 1rem;               
+    margin-bottom: 1rem;     
+}
+
+
 button{
-    margin-left: 1rem;
     padding: 10px; 
     border-radius: 20px;
     margin-bottom: 2rem;
@@ -28,6 +35,16 @@ button{
     color: white;
     border:none;
 
+}
+button.resposta:hover{
+    background:lightgreen;
+    color:black;
+
+}
+
+.btn-outline-dark {
+    padding: 10px; 
+    margin-bottom: 2rem;
 }
 
 

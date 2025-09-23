@@ -47,9 +47,13 @@ function renderPreguntaActual() {
   let htmlString = "";
 
   htmlString = `<h3 class="margen">${numPreguntaActual + 1}. ${pregunta.pregunta}</h3>`;
-  htmlString += `<img class="bandera margen" src="${pregunta.imatge}" alt="imatge pregunta"><br>`;
+  htmlString += `<div class="margen-bandera"><img class="bandera" src="${pregunta.imatge}" alt="imatge pregunta"></div><br>`;
 
+
+
+  htmlString += `<div class="margen-boton">`;
   for (let j = 0; j < pregunta.respostes.length; j++) {
+    
     let seleccionada =
       estatDeLaPartida.respostesUsuari[numPreguntaActual] === j + 1
         ? "seleccionada"
@@ -59,13 +63,15 @@ function renderPreguntaActual() {
       numPreguntaActual + 1
     }" data-resposta="${j + 1}">${pregunta.respostes[j]}</button>`;
   }
+  htmlString += `</div>`;
 
-  htmlString += `<div class="navegacion">`;
+
+  htmlString += `<div class="margen-boton navegacion">`;
   if (numPreguntaActual > 0) {
-    htmlString += `<button id="atras">⬅ Enrere</button>`;
+    htmlString += `<button id="atras" class="btn btn-outline-dark"> Enrere</button>`;
   }
   if (numPreguntaActual < estatDeLaPartida.totalPreguntes - 1) {
-    htmlString += `<button id="adelante"> Davant</button>`;
+    htmlString += `<button id="adelante" class="btn btn-outline-dark"> Davant</button>`;
   }
   htmlString += `</div>`;
 
