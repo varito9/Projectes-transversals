@@ -9,7 +9,7 @@ let numPreguntaActual = 0;
 
 function actualitzarMarcador() {
   let marcador = document.getElementById("marcador");
-  marcador.innerHTML = `Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}`;
+  marcador.innerHTML = `<p>Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}</p>`;
 }
 
 function actualizarPanel() {

@@ -6,6 +6,11 @@
 }
 
 
+p{
+  margin-top: 2rem;
+  text-align: center;
+}
+
 h3{
     margin-top: 2rem;
     text-align: center;
@@ -48,13 +53,12 @@ button.resposta:hover{
 }
 
 
-.hidden {
-  display: none;
-}
+
 
 .resposta.seleccionada {
     background:lightgreen;
     color: black;
+    border: solid 2px #1b1d1d
 }
 
 
@@ -64,8 +68,11 @@ button.resposta:hover{
   margin-top: 5rem;
   right: 0;
   margin-right: 1rem;
-  height: 80vh; 
-  width: 250px;
+  height: auto; 
+  width: 255px;
+  background-color: #1b1d1d;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 @media (max-width: 918px) {
@@ -76,4 +83,8 @@ button.resposta:hover{
     margin-top: 1rem;  /* un poco de separación */
     border-left: none; /* opcional, quitar borde */
   }
+}
+
+.hidden {
+  display: none;
 }
