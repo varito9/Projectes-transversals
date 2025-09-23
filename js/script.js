@@ -12,6 +12,32 @@ function actualitzarMarcador() {
   marcador.innerHTML = `Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}`;
 }
 
+function actualizarPanel() {
+  let panel = document.getElementById("panelRespostes");
+  let html = `<ul class="list-group">`;
+
+  for (let i = 0; i < preguntesGuardades.length; i++) {
+    let respostaUsuari = estatDeLaPartida.respostesUsuari[i];
+    let correcta = preguntesGuardades[i].correcta;
+
+    if (respostaUsuari === undefined) {
+      html += `<li class="list-group-item"> Pregunta ${i + 1}:
+     <span class="text-muted">Sense respondre</span>`;
+    } else {
+      let respostaText = preguntesGuardades[i].respostes[respostaUsuari - 1];
+      let esCorrecta = respostaText === correcta;
+
+      html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+        ${i + 1} <span class ="badge ${esCorrecta ? "bg-success" : "bg-danger"}"> 
+         ${esCorrecta ? "✔" : "✘"}
+         </span>
+         </li>`;
+    }
+  }
+  html += `</ul>`;
+  panel.innerHTML = html;
+}
+
 function marcarRespuesta(numPregunta, numRespuesta) {
   console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
 
@@ -33,7 +59,7 @@ function marcarRespuesta(numPregunta, numRespuesta) {
   //https://github.com/alvaroph/tr0_daw
 
   actualitzarMarcador();
-
+  actualizarPanel();
   renderPreguntaActual();
 
   if (estatDeLaPartida.contadorPreguntes === estatDeLaPartida.totalPreguntes) {
@@ -46,14 +72,13 @@ function renderPreguntaActual() {
   let pregunta = preguntesGuardades[numPreguntaActual];
   let htmlString = "";
 
-  htmlString = `<h3 class="margen">${numPreguntaActual + 1}. ${pregunta.pregunta}</h3>`;
+  htmlString = `<h3 class="margen">${numPreguntaActual + 1}. ${
+    pregunta.pregunta
+  }</h3>`;
   htmlString += `<div class="margen-bandera"><img class="bandera" src="${pregunta.imatge}" alt="imatge pregunta"></div><br>`;
-
-
 
   htmlString += `<div class="margen-boton">`;
   for (let j = 0; j < pregunta.respostes.length; j++) {
-    
     let seleccionada =
       estatDeLaPartida.respostesUsuari[numPreguntaActual] === j + 1
         ? "seleccionada"
@@ -64,7 +89,6 @@ function renderPreguntaActual() {
     }" data-resposta="${j + 1}">${pregunta.respostes[j]}</button>`;
   }
   htmlString += `</div>`;
-
 
   htmlString += `<div class="margen-boton navegacion">`;
   if (numPreguntaActual > 0) {
@@ -120,6 +144,8 @@ window.addEventListener("DOMContentLoaded", () => {
     .then((data) => {
       renderJuego(data);
       actualitzarMarcador();
+        actualizarPanel();
+
     })
     .catch((err) => console.error(err));
 
