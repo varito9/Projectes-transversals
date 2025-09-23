@@ -4,6 +4,19 @@
     margin-bottom: 2rem; 
     border: 1px solid black;
     margin-left: 2rem; 
+
+
+}
+
+
+h3{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.margen{
+    align-items: center;
+    
 }
 
 button{

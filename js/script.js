@@ -46,8 +46,8 @@ function renderPreguntaActual() {
   let pregunta = preguntesGuardades[numPreguntaActual];
   let htmlString = "";
 
-  htmlString = `<h3>${numPreguntaActual + 1}. ${pregunta.pregunta}</h3>`;
-  htmlString += `<img class="bandera" src="${pregunta.imatge}" alt="imatge pregunta"><br>`;
+  htmlString = `<h3 class="margen">${numPreguntaActual + 1}. ${pregunta.pregunta}</h3>`;
+  htmlString += `<img class="bandera margen" src="${pregunta.imatge}" alt="imatge pregunta"><br>`;
 
   for (let j = 0; j < pregunta.respostes.length; j++) {
     let seleccionada =
