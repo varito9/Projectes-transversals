@@ -62,10 +62,10 @@ function renderPreguntaActual() {
 
   htmlString += `<div class="navegacion">`;
   if (numPreguntaActual > 0) {
-    htmlString += `<button id="atras">⬅️ Enrere</button>`;
+    htmlString += `<button id="atras">⬅ Enrere</button>`;
   }
   if (numPreguntaActual < estatDeLaPartida.totalPreguntes - 1) {
-    htmlString += `<button id="adelante">➡️ Davant</button>`;
+    htmlString += `<button id="adelante"> Davant</button>`;
   }
   htmlString += `</div>`;
 

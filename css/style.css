@@ -11,6 +11,10 @@ button{
     padding: 10px; 
     border-radius: 20px;
     margin-bottom: 2rem;
+    background-color: #007bff;
+    color: white;
+    border:none;
+
 }
 
 
@@ -19,5 +23,6 @@ button{
 }
 
 .resposta.seleccionada {
-    background:lightgreen
+    background:lightgreen;
+    color: black;
 }
