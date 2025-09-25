@@ -47,6 +47,8 @@ function marcarRespuesta(numPregunta, numRespuesta) {
 
   estatDeLaPartida.respostesUsuari[numPregunta - 1] = numRespuesta;
 
+
+  /*
   let pregunta = preguntesGuardades[numPregunta - 1];
   let respuestaSeleccionada = pregunta.respostes[numRespuesta - 1];
 
@@ -55,6 +57,7 @@ function marcarRespuesta(numPregunta, numRespuesta) {
   } else {
     console.log("Resposta incorrecta");
   }
+*/
 
   //https://github.com/alvaroph/tr0_daw
 
@@ -92,10 +95,10 @@ function renderPreguntaActual() {
 
   htmlString += `<div class="margen-boton navegacion">`;
   if (numPreguntaActual > 0) {
-    htmlString += `<button id="atras" class="btn btn-outline-dark"> Enrere</button>`;
+    htmlString += `<button id="atras" class="btn btn-outline-dark"><i class="bi bi-arrow-left icono"></i></button>`;
   }
   if (numPreguntaActual < estatDeLaPartida.totalPreguntes - 1) {
-    htmlString += `<button id="adelante" class="btn btn-outline-dark"> Davant</button>`;
+    htmlString += `<button id="adelante" class="btn btn-outline-dark">  <i class="bi bi-arrow-right icono"></i></button>`;
   }
   htmlString += `</div>`;
 

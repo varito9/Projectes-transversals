@@ -28,12 +28,15 @@ h3{
     justify-content: center; 
     align-items: center;     
     gap: 1rem;               
-    margin-bottom: 1rem;     
+    margin-bottom: 1rem;
 }
 
+.navegacion{
+  gap :6rem;
+}
 
 button{
-    padding: 10px; 
+    padding: 1rem; 
     border-radius: 20px;
     margin-bottom: 2rem;
     background-color: #007bff;
@@ -44,16 +47,16 @@ button{
 button.resposta:hover{
     background:lightgreen;
     color:black;
-
 }
 
 .btn-outline-dark {
-    padding: 10px; 
-    margin-bottom: 2rem;
+      margin-bottom: 2rem;
+      padding: 0rem 2rem;
 }
 
-
-
+.icono{
+  font-size: 2rem;
+}
 
 .resposta.seleccionada {
     background:lightgreen;
