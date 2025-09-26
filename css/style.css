@@ -58,7 +58,8 @@ button.resposta:hover{
   font-size: 2rem;
 }
 
-.resposta.seleccionada {
+
+.seleccionada {
     background:lightgreen;
     color: black;
     border: solid 2px #1b1d1d
