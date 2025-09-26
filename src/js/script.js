@@ -1,9 +1,11 @@
+// Estat de la partida guarda el índice/número de la resposta seleccionada per l'usuari
 let estatDeLaPartida = {
   contadorPreguntes: 0,
   respostesUsuari: [],
   totalPreguntes: 0,
 };
 
+// Guarda el valor String de les preguntes i respostes
 let preguntesGuardades = [];
 let numPreguntaActual = 0;
 
@@ -18,35 +20,28 @@ function actualizarPanel() {
 
   for (let i = 0; i < preguntesGuardades.length; i++) {
     let respostaUsuari = estatDeLaPartida.respostesUsuari[i];
-    let correcta = preguntesGuardades[i].correcta;
 
     if (respostaUsuari === undefined) {
       html += `<li class="list-group-item"> Pregunta ${i + 1}:
-     <span class="text-muted">Sense respondre</span>`;
+        <span class="text-muted">Resposta pendent</span></li>`;
     } else {
-      let respostaText = preguntesGuardades[i].respostes[respostaUsuari - 1];
-      let esCorrecta = respostaText === correcta;
-
-      html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-        ${i + 1} <span class ="badge ${esCorrecta ? "bg-success" : "bg-danger"} "> 
-         ${esCorrecta ? "✓" : "✘"}
-         </span>
-         </li>`;
+      html += `<li class="list-group-item"> Pregunta ${i + 1}:
+        <span class="text-primary">Ya resposta</span></li>`;
     }
   }
   html += `</ul>`;
   panel.innerHTML = html;
 }
 
+
 function marcarRespuesta(numPregunta, numRespuesta) {
-  console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
-
-
-if(estatDeLaPartida.respostesUsuari[numPregunta - 1] !== undefined){
-  
-  return;
-}
-  estatDeLaPartida.respostesUsuari[numPregunta - 1] = numRespuesta;
+  if (estatDeLaPartida.respostesUsuari[numPregunta - 1] !== undefined) {
+    return;
+  }
+  estatDeLaPartida.respostesUsuari[numPregunta - 1] = {
+    idPregunta: preguntesGuardades[numPregunta - 1].id,
+    index: numRespuesta - 1,
+  };
 
   estatDeLaPartida.contadorPreguntes++;
 
@@ -74,15 +69,14 @@ function renderPreguntaActual() {
   htmlString += `<div class="margen-boton">`;
   for (let j = 0; j < pregunta.respostes.length; j++) {
     let seleccionada =
-      estatDeLaPartida.respostesUsuari[numPreguntaActual] === j + 1
+      estatDeLaPartida.respostesUsuari[numPreguntaActual]?.index === j
         ? "seleccionada"
         : "";
+
     let disabled =
       estatDeLaPartida.respostesUsuari[numPreguntaActual] !== undefined
         ? "disabled"
         : "";
-        
-
 
     htmlString += `<button class="resposta ${seleccionada}" ${disabled} data-pregunta="${
       numPreguntaActual + 1
@@ -115,39 +109,51 @@ function renderPreguntaActual() {
   }
 }
 
-function renderJuego(data) {
-  estatDeLaPartida.totalPreguntes = data.preguntes.length;
+function enviarResultats() {
+  fetch("/api/finalitza.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(estatDeLaPartida.respostesUsuari),
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Error al enviar resultats");
+      return response.json();
+    })
+    .then((resultats) => {
+      mostrarResultats(resultats);
+    })
+    .catch((err) => console.error(err));
+}
 
-  
-  for (let i = 0; i < data.preguntes.length; i++) {
-    let respostes = [
-      //utilitzem el spread operator per juntar un string amb un array d'strings  
-      data.preguntes[i].resposta_correcta,
-      ...data.preguntes[i].respostes_incorrectes,
-    ];
-    respostes.sort(() => Math.random() - 0.5);
+function mostrarResultats(resultats) {
+  let contenidor = document.getElementById("partida");
+  contenidor.innerHTML = `
+    <h2>Resultats</h2>
+    <p>Has encertat ${resultats.correctes} de ${resultats.total} preguntes.</p>
+    <button id="reiniciar" class="btn btn-primary">Tornar a jugar</button>
+  `;
 
-    preguntesGuardades[i] = {
-      respostes: respostes,
-      imatge: data.preguntes[i].imatge,
-      correcta: data.preguntes[i].resposta_correcta,
-      pregunta: data.preguntes[i].pregunta,
-    };
-  }
-  renderPreguntaActual();
+  document.getElementById("reiniciar").addEventListener("click", () => {
+    location.reload();
+  });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  fetch("./js/data.json")
+  let numPreguntes = 10; // Nombre de preguntes a carregar
+  fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
     .then((response) => {
-      if (!response.ok) throw new Error("Error al cargar data.json");
+      if (!response.ok) throw new Error("Error al cargar preguntes");
       return response.json();
     })
     .then((data) => {
-      renderJuego(data);
-      actualitzarMarcador();
-        actualizarPanel();
+      estatDeLaPartida.totalPreguntes = data.preguntes.length;
+      preguntesGuardades = data.preguntes;
 
+      renderPreguntaActual();
+      actualitzarMarcador();
+      actualizarPanel();
     })
     .catch((err) => console.error(err));
 
@@ -157,5 +163,9 @@ window.addEventListener("DOMContentLoaded", () => {
       let numRespuesta = parseInt(event.target.dataset.resposta);
       marcarRespuesta(numPregunta, numRespuesta);
     }
+  });
+
+  document.getElementById("btnResultats").addEventListener("click", () => {
+    enviarResultats();
   });
 });

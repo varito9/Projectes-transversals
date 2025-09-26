@@ -44,9 +44,15 @@ button{
     border:none;
 
 }
+
+button.resposta{
+    transition-duration:  0.3s;
+}
+
 button.resposta:hover{
-    background:lightgreen;
+    background-color: #ffd000;
     color:black;
+    padding: 1rem 2rem;
 }
 
 .btn-outline-dark {
@@ -58,11 +64,18 @@ button.resposta:hover{
   font-size: 2rem;
 }
 
+button.resposta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-.seleccionada {
-    background:lightgreen;
+
+#partida button.resposta.seleccionada {
+    background-color: #ffd000;
     color: black;
-    border: solid 2px #1b1d1d
+    border: solid 2px #1b1d1d;
+    opacity: 1;
+
 }
 
 
@@ -73,13 +86,13 @@ button.resposta:hover{
   right: 0;
   margin-right: 1rem;
   height: auto; 
-  width: 255px;
+  width: 265px;
   background-color: #1b1d1d;
   padding: 5px;
   border-radius: 10px;
 }
 
-@media (max-width: 918px) {
+@media (max-width: 1080px) {
   #panelRespostes {
     position: relative; /* ya no fijo */
     width: 100%;       /* ocupa todo el ancho */
