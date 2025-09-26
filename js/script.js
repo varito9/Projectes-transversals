@@ -28,8 +28,8 @@ function actualizarPanel() {
       let esCorrecta = respostaText === correcta;
 
       html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-        ${i + 1} <span class ="badge ${esCorrecta ? "bg-success" : "bg-danger"}"> 
-         ${esCorrecta ? "✔" : "✘"}
+        ${i + 1} <span class ="badge ${esCorrecta ? "bg-success" : "bg-danger"} "> 
+         ${esCorrecta ? "✓" : "✘"}
          </span>
          </li>`;
     }
@@ -41,23 +41,14 @@ function actualizarPanel() {
 function marcarRespuesta(numPregunta, numRespuesta) {
   console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
 
-  if (estatDeLaPartida.respostesUsuari[numPregunta - 1] === undefined) {
-    estatDeLaPartida.contadorPreguntes++;
-  }
 
+if(estatDeLaPartida.respostesUsuari[numPregunta - 1] !== undefined){
+  
+  return;
+}
   estatDeLaPartida.respostesUsuari[numPregunta - 1] = numRespuesta;
 
-
-  /*
-  let pregunta = preguntesGuardades[numPregunta - 1];
-  let respuestaSeleccionada = pregunta.respostes[numRespuesta - 1];
-
-  if (respuestaSeleccionada === pregunta.correcta) {
-    console.log("Resposta correcta");
-  } else {
-    console.log("Resposta incorrecta");
-  }
-*/
+  estatDeLaPartida.contadorPreguntes++;
 
   //https://github.com/alvaroph/tr0_daw
 
@@ -86,8 +77,14 @@ function renderPreguntaActual() {
       estatDeLaPartida.respostesUsuari[numPreguntaActual] === j + 1
         ? "seleccionada"
         : "";
+    let disabled =
+      estatDeLaPartida.respostesUsuari[numPreguntaActual] !== undefined
+        ? "disabled"
+        : "";
+        
 
-    htmlString += `<button class="resposta ${seleccionada}" data-pregunta="${
+
+    htmlString += `<button class="resposta ${seleccionada}" ${disabled} data-pregunta="${
       numPreguntaActual + 1
     }" data-resposta="${j + 1}">${pregunta.respostes[j]}</button>`;
   }
@@ -121,8 +118,10 @@ function renderPreguntaActual() {
 function renderJuego(data) {
   estatDeLaPartida.totalPreguntes = data.preguntes.length;
 
+  
   for (let i = 0; i < data.preguntes.length; i++) {
     let respostes = [
+      //utilitzem el spread operator per juntar un string amb un array d'strings  
       data.preguntes[i].resposta_correcta,
       ...data.preguntes[i].respostes_incorrectes,
     ];
