@@ -51,9 +51,10 @@ function marcarRespuesta(numPregunta, numRespuesta) {
   actualizarPanel();
   renderPreguntaActual();
 
-  if (estatDeLaPartida.contadorPreguntes === estatDeLaPartida.totalPreguntes) {
-    document.getElementById("btnResultats").classList.remove("hidden");
-  }
+if (estatDeLaPartida.contadorPreguntes === estatDeLaPartida.totalPreguntes) {
+  document.getElementById("btnResultats").classList.remove("hidden");
+}
+  
 }
 
 function renderPreguntaActual() {
@@ -110,6 +111,9 @@ function renderPreguntaActual() {
 }
 
 function enviarResultats() {
+document.getElementById("btnResultats").classList.add("hidden");
+document.getElementById("marcador").classList.add("hidden");
+
   fetch("/api/finalitza.php", {
     method: "POST",
     headers: {
@@ -130,9 +134,9 @@ function enviarResultats() {
 function mostrarResultats(resultats) {
   let contenidor = document.getElementById("partida");
   contenidor.innerHTML = `
-    <h2>Resultats</h2>
-    <p>Has encertat ${resultats.correctes} de ${resultats.total} preguntes.</p>
-    <button id="reiniciar" class="btn btn-primary">Tornar a jugar</button>
+    <h2 class="resultat">Resultats</h2>
+    <p class="margen">Has encertat ${resultats.correctes} de ${resultats.total} preguntes.</p>
+    <div class="margen-boton"> <button id="reiniciar" class="">Tornar a jugar</button></div>
   `;
 
   document.getElementById("reiniciar").addEventListener("click", () => {

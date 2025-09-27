@@ -5,15 +5,29 @@
     border: 1px solid black;
 }
 
-
+body{
+  background: linear-gradient(
+    135deg,
+    #ffe8f3,
+    #d9f3ff
+  );
+}
 p{
   margin-top: 2rem;
   text-align: center;
+}
+p.margen{
+    margin-top: 5rem;
+    text-align: center;
 }
 
 h3{
     margin-top: 2rem;
     text-align: center;
+}
+.resultat{
+    text-align: center;
+    margin-top: 13rem;
 }
 
 .margen-bandera{
@@ -50,8 +64,12 @@ button.resposta{
 }
 
 button.resposta:hover{
-    background-color: #ffd000;
-    color:black;
+  background: linear-gradient(
+    135deg,
+    #d80a6d,
+    #4fc5fc
+  );   
+   color:black;
     padding: 1rem 2rem;
 }
 
@@ -71,11 +89,44 @@ button.resposta:disabled {
 
 
 #partida button.resposta.seleccionada {
-    background-color: #ffd000;
+    background: linear-gradient(
+      135deg,
+      #d80a6d,
+      #4fc5fc
+    );      
     color: black;
     border: solid 2px #1b1d1d;
     opacity: 1;
 
+}
+
+#btnResultats {
+    transition-duration:  0.3s;
+}
+
+#btnResultats:hover {
+    padding: 1rem 2rem;
+    background: linear-gradient(
+      135deg,
+      #d80a6d,
+      #4fc5fc
+    );  
+}
+
+#reiniciar {
+    transition-duration: 0.3s;
+    margin-top: 4rem;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+}
+
+#reiniciar:hover {
+    padding: 1rem 3rem;
+    background: linear-gradient(
+      135deg,
+      #d80a6d,
+      #4fc5fc
+    );  
 }
 
 
@@ -87,7 +138,11 @@ button.resposta:disabled {
   margin-right: 1rem;
   height: auto; 
   width: 265px;
-  background-color: #1b1d1d;
+  background: linear-gradient(
+      135deg,
+      #d80a6d,
+      #4fc5fc
+    );    
   padding: 5px;
   border-radius: 10px;
 }
