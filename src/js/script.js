@@ -26,7 +26,7 @@ function actualizarPanel() {
         <span class="text-muted">Resposta pendent</span></li>`;
     } else {
       html += `<li class="list-group-item"> Pregunta ${i + 1}:
-        <span class="text-primary">Ya resposta</span></li>`;
+        <span class="text-primary">Ja resposta</span></li>`;
     }
   }
   html += `</ul>`;
@@ -40,7 +40,7 @@ function marcarRespuesta(numPregunta, numRespuesta) {
   }
   estatDeLaPartida.respostesUsuari[numPregunta - 1] = {
     idPregunta: preguntesGuardades[numPregunta - 1].id,
-    index: numRespuesta - 1,
+    respostaText: preguntesGuardades[numPregunta - 1].respostes[numRespuesta - 1]
   };
 
   estatDeLaPartida.contadorPreguntes++;
@@ -139,12 +139,18 @@ function mostrarResultats(resultats) {
     <div class="margen-boton"> <button id="reiniciar" class="">Tornar a jugar</button></div>
   `;
 
+  
+    document.getElementById("reiniciar").addEventListener("click", () => {
+      inicialitzarPartida();
+    });
+}
 
 
   // Repetim codi per reiniciar la partida perquè sinó dona tornaria a recarregar la pàgina sencera
-  // amb location.reload() i perdríem l'estat de la partida
-  document.getElementById("reiniciar").addEventListener("click", () => {
-    let estatDeLaPartida = {
+  // amb location.reload()
+
+function inicialitzarPartida(numPreguntes = 10) {
+  estatDeLaPartida = {
       contadorPreguntes: 0,
       respostesUsuari: [],
       totalPreguntes: 0,
@@ -152,44 +158,28 @@ function mostrarResultats(resultats) {
     preguntesGuardades = [];
     numPreguntaActual = 0;
 
-    let numPreguntes = 10; {
+    document.getElementById("panelRespostes").innerHTML = "";
+    document.getElementById("marcador").innerHTML = "";
+    document.getElementById("btnResultats").classList.add("hidden");
+
+
       fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
-        .then((response) => {
-          if (!response.ok) throw new Error("Error al cargar preguntes");
-          return response.json();
-        })
+        .then((response) =>{
+      if (!response.ok) throw new Error("Error al carregar preguntes");
+      return response.json();
+    })
         .then((data) => {
           estatDeLaPartida.totalPreguntes = data.preguntes.length;
           preguntesGuardades = data.preguntes;
           renderPreguntaActual();
           actualitzarMarcador();
           actualizarPanel();
-
-          document.getElementById("marcador").classList.remove("hidden");
-          document.getElementById("btnResultats").classList.add("hidden");
         })
         .catch((err) => console.error(err));
-    }
-  });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  let numPreguntes = 10; // Nombre de preguntes a carregar
-  fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
-    .then((response) => {
-      if (!response.ok) throw new Error("Error al cargar preguntes");
-      return response.json();
-    })
-    .then((data) => {
-      estatDeLaPartida.totalPreguntes = data.preguntes.length;
-      preguntesGuardades = data.preguntes;
-
-      renderPreguntaActual();
-      actualitzarMarcador();
-      actualizarPanel();
-    })
-    .catch((err) => console.error(err));
-
+  inicialitzarPartida();
   document.getElementById("partida").addEventListener("click", (event) => {
     if (event.target.classList.contains("resposta")) {
       let numPregunta = parseInt(event.target.dataset.pregunta);

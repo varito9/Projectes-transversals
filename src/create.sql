@@ -15,17 +15,28 @@ CREATE TABLE respostes (
 );
 
 -- Insercions de preguntes i respostes
+
+-- 1 australia
+-- 2 japon
+-- 3 noruega
+-- 4 india
+-- 5 canada
+-- 6 sudafrica
+-- 7 vietnam
+-- 8 arabiasaudi
+-- 9 suecia
+-- 10 turquia
 INSERT INTO preguntes (text, imatge) VALUES
-('De quin país és aquesta bandera?', './img/japon.png'),
-('De quin país és aquesta bandera?', './img/australia.png'),
-('De quin país és aquesta bandera?', './img/norway.png'),
-('De quin país és aquesta bandera?', './img/india.png'),
-('De quin país és aquesta bandera?', './img/canada.png'),
-('De quin país és aquesta bandera?', './img/sudafrica.png'),
-('De quin país és aquesta bandera?', './img/vietnam.png'),
-('De quin país és aquesta bandera?', './img/arabiasaudi.png'),
-('De quin país és aquesta bandera?', './img/suecia.png'),
-('De quin país és aquesta bandera?', './img/turquia.png');
+('De quin país és aquesta bandera?', './img/b5.png'), 
+('De quin país és aquesta bandera?', './img/b2.png'), 
+('De quin país és aquesta bandera?', './img/b6.png'), 
+('De quin país és aquesta bandera?', './img/b4.png'), 
+('De quin país és aquesta bandera?', './img/b3.png'), 
+('De quin país és aquesta bandera?', './img/b7.png'), 
+('De quin país és aquesta bandera?', './img/b10.png'), 
+('De quin país és aquesta bandera?', './img/b1.png'), 
+('De quin país és aquesta bandera?', './img/b8.png'), 
+('De quin país és aquesta bandera?', './img/b9.png'); 
 
 -- Respostes per a cada pregunta
 -- Pregunta 1: Japó

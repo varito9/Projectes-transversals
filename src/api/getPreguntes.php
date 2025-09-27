@@ -21,6 +21,9 @@ while ($p = mysqli_fetch_assoc($result)) {
         $respostes[] = $r['text'];
     }
 
+    // barajar respostes
+    shuffle($respostes);
+
     $preguntes[] = [
         "id" => $idPregunta,
         "pregunta" => $p['text'],
