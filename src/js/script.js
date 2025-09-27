@@ -139,8 +139,37 @@ function mostrarResultats(resultats) {
     <div class="margen-boton"> <button id="reiniciar" class="">Tornar a jugar</button></div>
   `;
 
+
+
+  // Repetim codi per reiniciar la partida perquè sinó dona tornaria a recarregar la pàgina sencera
+  // amb location.reload() i perdríem l'estat de la partida
   document.getElementById("reiniciar").addEventListener("click", () => {
-    location.reload();
+    let estatDeLaPartida = {
+      contadorPreguntes: 0,
+      respostesUsuari: [],
+      totalPreguntes: 0,
+    };
+    preguntesGuardades = [];
+    numPreguntaActual = 0;
+
+    let numPreguntes = 10; {
+      fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
+        .then((response) => {
+          if (!response.ok) throw new Error("Error al cargar preguntes");
+          return response.json();
+        })
+        .then((data) => {
+          estatDeLaPartida.totalPreguntes = data.preguntes.length;
+          preguntesGuardades = data.preguntes;
+          renderPreguntaActual();
+          actualitzarMarcador();
+          actualizarPanel();
+
+          document.getElementById("marcador").classList.remove("hidden");
+          document.getElementById("btnResultats").classList.add("hidden");
+        })
+        .catch((err) => console.error(err));
+    }
   });
 }
 
