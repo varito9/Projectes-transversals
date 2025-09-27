@@ -1,0 +1,32 @@
+body {
+  background-color: #f5f6fa;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.pregunta {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pregunta:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.resposta {
+  margin-left: 10px;
+  padding: 2px 0;
+}
+
+.btn-primary {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.card {
+  border-radius: 12px;
+}

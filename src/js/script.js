@@ -40,7 +40,9 @@ function marcarRespuesta(numPregunta, numRespuesta) {
   }
   estatDeLaPartida.respostesUsuari[numPregunta - 1] = {
     idPregunta: preguntesGuardades[numPregunta - 1].id,
-    respostaText: preguntesGuardades[numPregunta - 1].respostes[numRespuesta - 1]
+    respostaText: preguntesGuardades[numPregunta - 1].respostes[numRespuesta - 1],
+    index: numRespuesta - 1,
+
   };
 
   estatDeLaPartida.contadorPreguntes++;

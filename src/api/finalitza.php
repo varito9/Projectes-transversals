@@ -17,11 +17,11 @@ foreach ($data as $respostaUsuari) {
     $respostaText = mysqli_real_escape_string($conn, $respostaUsuari['respostaText']);
 
     // Recuperar la resposta correcta desde la BD
-    $sql = "SELECT text FROM respostes WHERE id_pregunta = $idPregunta AND es_correcta = 1 LIMIT 1";
+    $sql = "SELECT texto FROM respostes WHERE id_pregunta = $idPregunta AND es_correcta = 1 LIMIT 1";
     $result = mysqli_query($conn, $sql);
 
     if ($result && $row = mysqli_fetch_assoc($result)) {
-        $respostaCorrecta = $row['text'];
+        $respostaCorrecta = $row['texto'];
 
         if ($respostaText === $respostaCorrecta) {
             $correctes++;

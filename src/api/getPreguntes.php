@@ -13,12 +13,12 @@ while ($p = mysqli_fetch_assoc($result)) {
     $idPregunta = $p['id'];
 
     // respostes associades
-    $sqlRes = "SELECT id, text FROM respostes WHERE id_pregunta = $idPregunta";
+    $sqlRes = "SELECT id, texto FROM respostes WHERE id_pregunta = $idPregunta";
     $res = mysqli_query($conn, $sqlRes);
 
     $respostes = [];
     while ($r = mysqli_fetch_assoc($res)) {
-        $respostes[] = $r['text'];
+        $respostes[] = $r['texto'];
     }
 
     // barajar respostes
@@ -26,7 +26,7 @@ while ($p = mysqli_fetch_assoc($result)) {
 
     $preguntes[] = [
         "id" => $idPregunta,
-        "pregunta" => $p['text'],
+        "pregunta" => $p['texto'],
         "imatge" => $p['imatge'],
         "respostes" => $respostes
     ];
