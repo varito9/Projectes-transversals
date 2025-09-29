@@ -116,6 +116,7 @@ function enviarResultats() {
 document.getElementById("btnResultats").classList.add("hidden");
 document.getElementById("marcador").classList.add("hidden");
 
+// En producción cambiamos a /src/api/finalitza.php
   fetch("/api/finalitza.php", {
     method: "POST",
     headers: {
@@ -165,6 +166,7 @@ function inicialitzarPartida(numPreguntes = 10) {
     document.getElementById("btnResultats").classList.add("hidden");
 
 
+// En producción cambiamos a /src/api/getPreguntes.php
       fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
         .then((response) =>{
       if (!response.ok) throw new Error("Error al carregar preguntes");
