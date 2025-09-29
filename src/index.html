@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <div id="contenidorUsuari" class="text-center mt-3">
+        <!--Posem div perqué no recarrega la pàgina -->
+        <div id="formulariUsuari">
+            <h3> Introdueix el teu nom </h3>
+            <input type="text" id="nomUsuari" placeholder="Introdueix el teu nom">
+            <button id="btnGuardar" >Guardar</button>
+        </div>
+    
+        <div id="benvingudaUsuari"> 
+            <h3> Benvingut/da <span id="nomJugador"></span> </h3>
+            <button id="btnEsborar"  class="btn btn-danger mt-3">Esborrar</button>
+        </div>
+    </div>
+
     <div id="partida"> </div>
     <div id="marcador"> </div>
 

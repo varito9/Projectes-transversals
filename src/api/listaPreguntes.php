@@ -2,15 +2,18 @@
 header("Content-Type: application/json");
 require_once "db.php";
 
-$sql = "SELECT * FROM preguntes";
-$result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM preguntes"; // Escribimos la consulta
+$result = mysqli_query($conn, $sql); // Ejecutamos la consulta
 
-$preguntes = [];
+$preguntes = []; // Array para almacenar las preguntas
 
+
+//result muestra toda la consulta 
+//p muestra cada fila de la consulta
 while ($p = mysqli_fetch_assoc($result)) {
     $idPregunta = $p['id'];
 
-    // Obtenemos respuestas
+    // Obtenemos respuestas comprobando que coincida el id con la pregunta
     $sqlRes = "SELECT id, texto, es_correcta FROM respostes WHERE id_pregunta = $idPregunta";
     $res = mysqli_query($conn, $sqlRes);
 
