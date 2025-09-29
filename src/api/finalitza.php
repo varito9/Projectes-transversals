@@ -11,6 +11,7 @@ if (!$data || !is_array($data)) {
 
 $correctes = 0;
 $total = count($data);
+$detall = [];
 
 foreach ($data as $respostaUsuari) {
     $idPregunta = intval($respostaUsuari['idPregunta']);
@@ -22,14 +23,19 @@ foreach ($data as $respostaUsuari) {
 
     if ($result && $row = mysqli_fetch_assoc($result)) {
         $respostaCorrecta = $row['texto'];
-
-        if ($respostaText === $respostaCorrecta) {
+        $encertat = $respostaCorrecta === $respostaText;
+        if ($encertat) {
             $correctes++;
         }
+        $detall[] = [
+            "idPregunta" => $idPregunta,
+            "correcte" => $encertat
+        ];
     }
 }
 
 echo json_encode([
     "correctes" => $correctes,
-    "total" => $total
+    "total" => $total,
+    "detall" => $detall                             
 ]);
