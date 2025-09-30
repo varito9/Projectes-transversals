@@ -39,18 +39,26 @@ function actualizarPanel() {
   for (let i = 0; i < preguntesGuardades.length; i++) {
     let respostaUsuari = estatDeLaPartida.respostesUsuari[i];
 
+    let estat = "";
     if (respostaUsuari === undefined) {
-      html += `<li class="list-group-item"> Pregunta ${i + 1}:
-        <span class="text-muted">Resposta pendent</span></li>
-        `;
+      estat = `<span class="text-black">Resposta pendent</span>`;
     } else {
-      html += `<li class="list-group-item"> Pregunta ${i + 1}:
-        <span class="text-primary">Ja resposta</span></li>`;
+      estat = `<span class="text-primary">Ja resposta</span>`;
     }
+
+    html += `
+      <li class=" d-flex justify-content-between align-items-center">
+        
+        <button class=" irPregunta" data-pregunta="${i}">
+          Pregunta ${i + 1}: ${estat}
+        </button>
+      </li>`;
   }
+
   html += `</ul>`;
   panel.innerHTML = html;
 }
+
 
 function marcarRespuesta(numPregunta, numRespuesta) {
   if (estatDeLaPartida.respostesUsuari[numPregunta - 1] !== undefined) {
@@ -248,4 +256,12 @@ window.addEventListener("DOMContentLoaded", () => {
       "<p class='text-muted'>Encara no hi ha respostes</p>";
     Usuari();
   });
+
+  document.getElementById("panelRespostes").addEventListener("click", (event) => {
+  if (event.target.classList.contains("irPregunta")) {
+    let num = parseInt(event.target.dataset.pregunta); // índice en array
+    numPreguntaActual = num;
+    renderPreguntaActual();
+  }
+});
 });
