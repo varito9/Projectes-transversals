@@ -29,7 +29,7 @@ function Usuari() {
 
 function actualitzarMarcador() {
   let marcador = document.getElementById("marcador");
-  marcador.innerHTML = `<p>Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}</p>`;
+  marcador.innerHTML = `<p class="izquierda">Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}</p>`;
 }
 
 function actualizarPanel() {
