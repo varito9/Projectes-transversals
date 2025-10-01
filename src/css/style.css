@@ -97,10 +97,10 @@ button.resposta:disabled {
     color: black;
     border: solid 2px #1b1d1d;
     opacity: 1;
-
 }
 
 #btnResultats {
+  display: block;
     transition-duration:  0.3s;
 }
 
@@ -138,24 +138,35 @@ button.resposta:disabled {
   margin-right: 1rem;
   height: auto; 
   width: 290px;
-   
-  padding: 5px;
-  border-radius: 10px;
 }
 
 #panelRespostes button.irPregunta{
+  margin-bottom: 1rem;
+  border-radius: 1rem;
   padding: 10px;
-  margin: 10px;
-  width: 100%;
-  height: 100%;
   background: linear-gradient(
       135deg,
       #d80a6d,
       #4fc5fc
     );
-    border: 1px solid black; 
   }
 
+  .correcto{
+    transition-duration:  0.3s;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: 10px;
+    background-color: #69d647;
+  }
+
+  .incorrecto{
+    transition-duration:  0.3s;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: 10px;
+    background-color: #e93030;
+
+  }
 
 .borrarcomenzar{
   display: flex;
@@ -165,21 +176,29 @@ button.resposta:disabled {
 }
 
 
-
 #btnEsborrar {
-    padding: 1rem 2rem;
+    padding: 10px 20px;
     transition-duration:  0.3s;
     background-color: #e93030;
 }
-#btnEsborrar:hover {
+#btnEsborrar:hover ,.incorrecto:hover {
     padding: 1rem 3rem;
     background: linear-gradient(
       135deg,
       #d80a6d,
       #ff5e00
     );  
-
 }
+
+  .correcto:hover{
+    padding: 1rem 3rem;
+    background: linear-gradient(
+        135deg,
+        #69d647,
+        #00c0e2
+      );
+  }
+
 
 @media (max-width: 1080px) {
   #panelRespostes {

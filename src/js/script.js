@@ -34,7 +34,7 @@ function actualitzarMarcador() {
 
 function actualizarPanel() {
   let panel = document.getElementById("panelRespostes");
-  let html = `<ul class="list-group">`;
+  let html = `<ul>`;
 
   for (let i = 0; i < preguntesGuardades.length; i++) {
     let respostaUsuari = estatDeLaPartida.respostesUsuari[i];
@@ -43,16 +43,12 @@ function actualizarPanel() {
     if (respostaUsuari === undefined) {
       estat = `<span class="text-black">Resposta pendent</span>`;
     } else {
-      estat = `<span class="text-primary">Ja resposta</span>`;
+      estat = `<span class="text-black">Ja resposta</span>`;
     }
 
-    html += `
-      <li class=" d-flex justify-content-between align-items-center">
-        
-        <button class=" irPregunta" data-pregunta="${i}">
+    html += `<button class=" irPregunta w-100 text-start" data-pregunta="${i}">
           Pregunta ${i + 1}: ${estat}
-        </button>
-      </li>`;
+        </button>`;
   }
 
   html += `</ul>`;
@@ -174,13 +170,13 @@ function mostrarResultats(resultats) {
     let preguntaDetall = resultats.detall[i];
 
     if (preguntaDetall.correcte) {
-      html += `<li class="list-group-item"> Pregunta ${
+      html += `<button class="correcto"> Pregunta ${
         i + 1
-      }: ✅ Correcte</li>`;
+      }: ✅ Correcte</button>`;
     } else {
-      html += `<li class="list-group-item"> Pregunta ${
+      html += `<button class="incorrecto"> Pregunta ${
         i + 1
-      }: ❌ Incorrecte</li>`;
+      }: ❌ Incorrecte</button>`;
     }
   }
   html += `</ul>`;
