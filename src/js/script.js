@@ -9,7 +9,27 @@ let estatDeLaPartida = {
 let preguntesGuardades = [];
 let numPreguntaActual = 0;
 
-function Usuari() {
+let contador = 0;
+let guardarIntervalo;
+
+
+function contadorJuego(){
+  contador++;
+  let minutos = Math.floor(contador / 60);
+  let segundos = contador % 60;
+
+
+    if (segundos < 10) {
+    segundos = "0" + segundos;
+  }
+
+  document.getElementById("temps").innerHTML = minutos + ":" + segundos;
+}
+
+function usuari() {
+
+  const contador = document.getElementById("temps");
+  const esborrar = document.getElementById("btnEsborrar");
   const formulari = document.getElementById("formulariUsuari");
   const benvinguda = document.getElementById("benvingudaUsuari");
   const nomJugador = document.getElementById("nomJugador");
@@ -17,36 +37,44 @@ function Usuari() {
   const nomGuardat = localStorage.getItem("nomUsuari");
 
   if (nomGuardat) {
+    contador.classList.remove("hidden");
+    esborrar.classList.remove("hidden");
     formulari.classList.add("hidden");
     benvinguda.classList.remove("hidden");
     nomJugador.textContent = nomGuardat;
     inicialitzarPartida();
   } else {
+    contador.classList.add("hidden");
+    esborrar.classList.add("hidden");
     formulari.classList.remove("hidden");
     benvinguda.classList.add("hidden");
+
   }
 }
 
 function actualitzarMarcador() {
   let marcador = document.getElementById("marcador");
-  marcador.innerHTML = `<p class="izquierda">Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}</p>`;
+  marcador.innerHTML = `<p>Preguntes respostes: ${estatDeLaPartida.contadorPreguntes} de ${estatDeLaPartida.totalPreguntes}</p>`;
 }
 
 function actualizarPanel() {
   let panel = document.getElementById("panelRespostes");
-  let html = `<ul>`;
+  let html = `<ul class="list-group-item">`;
 
   for (let i = 0; i < preguntesGuardades.length; i++) {
     let respostaUsuari = estatDeLaPartida.respostesUsuari[i];
 
     let estat = "";
     if (respostaUsuari === undefined) {
-      estat = `<span class="text-black">Resposta pendent</span>`;
+      estat = `Resposta pendent`;
     } else {
-      estat = `<span class="text-black">Ja resposta</span>`;
+      estat = `Ja resposta`;
     }
 
-    html += `<button class=" irPregunta w-100 text-start" data-pregunta="${i}">
+    let panelPregunta = numPreguntaActual === i ? "seleccionada" : "";
+
+
+    html += `<button class=" irPregunta w-100 ${panelPregunta}" data-pregunta="${i}">
           Pregunta ${i + 1}: ${estat}
         </button>`;
   }
@@ -131,9 +159,13 @@ function renderPreguntaActual() {
       renderPreguntaActual();
     });
   }
+  actualizarPanel();
 }
 
 function enviarResultats() {
+
+  clearInterval(guardarIntervalo);
+
   document.getElementById("btnResultats").classList.add("hidden");
   document.getElementById("marcador").classList.add("hidden");
 
@@ -172,17 +204,19 @@ function mostrarResultats(resultats) {
     if (preguntaDetall.correcte) {
       html += `<button class="correcto"> Pregunta ${
         i + 1
-      }: ✅ Correcte</button>`;
+      }:  Correcte</button>`;
     } else {
       html += `<button class="incorrecto"> Pregunta ${
         i + 1
-      }: ❌ Incorrecte</button>`;
+      }:  Incorrecte</button>`;
     }
   }
   html += `</ul>`;
   panel.innerHTML = html;
 
   document.getElementById("reiniciar").addEventListener("click", () => {
+    
+    guardarIntervalo = setInterval(contadorJuego , 1000);
     inicialitzarPartida();
   });
 }
@@ -191,6 +225,11 @@ function mostrarResultats(resultats) {
 // amb location.reload()
 
 function inicialitzarPartida(numPreguntes = 10) {
+
+  contador = 0;
+  document.getElementById("temps").innerHTML = "0:00";
+
+
   estatDeLaPartida = {
     contadorPreguntes: 0,
     respostesUsuari: [],
@@ -200,6 +239,8 @@ function inicialitzarPartida(numPreguntes = 10) {
   numPreguntaActual = 0;
 
   document.getElementById("panelRespostes").innerHTML = "";
+  
+    document.getElementById("marcador").classList.remove("hidden");
   document.getElementById("marcador").innerHTML = "";
   document.getElementById("btnResultats").classList.add("hidden");
 
@@ -220,7 +261,11 @@ function inicialitzarPartida(numPreguntes = 10) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  Usuari();
+
+  guardarIntervalo = setInterval(contadorJuego , 1000);
+
+  usuari();
+  
   document.getElementById("partida").addEventListener("click", (event) => {
     if (event.target.classList.contains("resposta")) {
       let numPregunta = parseInt(event.target.dataset.pregunta);
@@ -238,7 +283,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const nom = document.getElementById("nomUsuari").value;
     if (nom) {
       localStorage.setItem("nomUsuari", nom);
-      Usuari();
+      usuari();
     } else {
       alert("Si us plau, introdueix un nom.");
     }
@@ -248,9 +293,13 @@ window.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("nomUsuari");
     document.getElementById("nomUsuari").value = "";
     document.getElementById("partida").innerHTML = "";
+    document.getElementById("marcador").innerHTML = "";
+
     document.getElementById("panelRespostes").innerHTML =
       "<p class='text-muted'>Encara no hi ha respostes</p>";
-    Usuari();
+
+
+    usuari();
   });
 
   document.getElementById("panelRespostes").addEventListener("click", (event) => {

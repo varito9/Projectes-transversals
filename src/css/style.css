@@ -21,9 +21,13 @@ p.margen{
     text-align: center;
 }
 
+h3.margen{
+    margin-top: 3rem;
+    text-align: center;
+}
+
 h3{
     margin-top: 2rem;
-    text-align: center;
 }
 .resultat{
     text-align: center;
@@ -99,8 +103,18 @@ button.resposta:disabled {
     opacity: 1;
 }
 
+
+#panelRespostes button.seleccionada {
+    background: linear-gradient(
+      135deg,
+      #d80a6d,
+      #4fc5fc
+    );      
+    color: black;
+    border: solid 2px #1b1d1d;
+}
+
 #btnResultats {
-  display: block;
     transition-duration:  0.3s;
 }
 
@@ -141,15 +155,22 @@ button.resposta:disabled {
 }
 
 #panelRespostes button.irPregunta{
+  transition-duration: 0.3s;
   margin-bottom: 1rem;
   border-radius: 1rem;
   padding: 10px;
+  }
+
+  #panelRespostes button.irPregunta:hover{
+  padding: 1rem 2rem;
   background: linear-gradient(
       135deg,
       #d80a6d,
       #4fc5fc
     );
+    color: black;
   }
+
 
   .correcto{
     transition-duration:  0.3s;
@@ -175,9 +196,11 @@ button.resposta:disabled {
   gap: 6rem;
 }
 
-
+#btnComençar {
+  margin-top: 4rem;
+}
 #btnEsborrar {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     transition-duration:  0.3s;
     background-color: #e93030;
 }
@@ -200,6 +223,17 @@ button.resposta:disabled {
   }
 
 
+#panelIzquierdo {
+  position:fixed;
+  top: 0;
+  margin-left: 3rem;
+}
+
+  
+h5#marcador{
+  margin-top: 2rem;
+}
+
 @media (max-width: 1080px) {
   #panelRespostes {
     position: relative; /* ya no fijo */
@@ -209,7 +243,25 @@ button.resposta:disabled {
     border-left: none; /* opcional, quitar borde */
   }
 
+  #panelIzquierdo {
+        position: relative;   /* deja de estar fijo */
+        top: 0;
+        margin-left: 0;
+        width: 100%;          /* ocupa todo el ancho */
+        text-align: center;
+      }
 
+  
+
+ #benvingudaUsuari h3{
+      margin-top: 0;
+
+}
+
+h3.margen{
+    margin-top: 2rem;
+    text-align: center;
+}
 }
 
 .hidden {
@@ -217,3 +269,66 @@ button.resposta:disabled {
 }
 
 
+#formulariUsuari{
+  margin-top: 10rem;
+}
+
+#temps {
+    background: linear-gradient(135deg, #4800f1 0%, #33ebdb 100%);
+    color: white;
+    font-size: 2.5rem;
+    font-weight:600;
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    width: 200px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#temps:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+}
+
+/* Efectes per el altre format quan queda gairebé poc temps
+#temps.tiempo-bajo {
+    animation: pulsar 1s infinite;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+@keyframes pulsar {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+    */
+
+
+
+    @media (max-width: 500px) {
+  .margen-boton, 
+  .borrarcomenzar {
+    display: flex;
+    flex-wrap: wrap;   /* permite varias líneas */
+    gap: 0.5rem;       /* separación entre botones */
+    justify-content: center;
+  }
+
+  .margen-boton button,
+  .borrarcomenzar button {
+    flex: 1 1 45%;     /* ocupa ~45% del ancho */
+    max-width: 48%;    /* evita que pasen de 2 por fila */
+  }
+  
+  #temps {
+    font-size: 1.2rem;      /* cronómetro más compacto */
+    width: auto;            /* se ajusta al contenido */
+    padding: 10px 20px;
+  }
+}
