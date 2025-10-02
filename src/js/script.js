@@ -28,6 +28,7 @@ function contadorJuego(){
 
 function usuari() {
 
+  const titol = document.getElementById("titol");
   const contador = document.getElementById("temps");
   const esborrar = document.getElementById("btnEsborrar");
   const formulari = document.getElementById("formulariUsuari");
@@ -37,6 +38,7 @@ function usuari() {
   const nomGuardat = localStorage.getItem("nomUsuari");
 
   if (nomGuardat) {
+    titol.classList.add("hidden");
     contador.classList.remove("hidden");
     esborrar.classList.remove("hidden");
     formulari.classList.add("hidden");
@@ -44,6 +46,7 @@ function usuari() {
     nomJugador.textContent = nomGuardat;
     inicialitzarPartida();
   } else {
+      titol.classList.remove("hidden");
     contador.classList.add("hidden");
     esborrar.classList.add("hidden");
     formulari.classList.remove("hidden");
@@ -295,8 +298,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("partida").innerHTML = "";
     document.getElementById("marcador").innerHTML = "";
 
-    document.getElementById("panelRespostes").innerHTML =
-      "<p class='text-muted'>Encara no hi ha respostes</p>";
+    document.getElementById("panelRespostes").innerHTML ="";
 
 
     usuari();
