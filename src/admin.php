@@ -19,13 +19,13 @@
     <input type="text" class="form-control mb-3" id="novaPregunta" placeholder="Text de la pregunta">
 
     <div id="respostesInputs" class="mb-3">
-      <input type="text" class="form-control mb-2" placeholder="Resposta 0">
-      <input type="text" class="form-control mb-2" placeholder="Resposta 1">
-      <input type="text" class="form-control mb-2" placeholder="Resposta 2">
-      <input type="text" class="form-control mb-2" placeholder="Resposta 3">
+      <input type="text" class="form-control mb-2" placeholder="Resposta 0" required>
+      <input type="text" class="form-control mb-2" placeholder="Resposta 1" required>
+      <input type="text" class="form-control mb-2" placeholder="Resposta 2" required>
+      <input type="text" class="form-control mb-2" placeholder="Resposta 3" required>
     </div>
     <label class="form-label">Índex correcte (0–3):</label>
-    <input type="number" class="form-control w-25 mb-3" id="correcte" min="0" max="3">
+    <input type="number" class="form-control w-25 mb-3" id="correcte" min="0" max="3" required>
 
     <label class="form-label">Imatge</label>
     <input type="file" class="form-control mb-3" id="novaImagen">
@@ -71,47 +71,92 @@
 <script>
 let editId = null;
 
+// Mostrar todas las preguntas con imagen
 async function carregarPreguntes() {
   const res = await fetch('api/listaPreguntes.php');
   const preguntes = await res.json();
   const container = document.getElementById('preguntesContainer');
   container.innerHTML = '';
 
-  preguntes.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'card shadow-sm';
-    div.innerHTML = `
-      <div class="card-body">
-        <strong>${p.question_text}</strong>
-        <hr>
-        ${p.answers.map((a,i) => `<div>${i}: ${a}${i===p.correct_index?' ✅':''}</div>`).join('')}
-        <div class="d-flex justify-content-end gap-2 mt-2">
-          <button class="btn btn-sm btn-warning" onclick='abrirModal(${p.id}, "${p.question_text.replace(/"/g,"&quot;")}", ${JSON.stringify(p.answers)}, ${p.correct_index})'> Editar</button>
-          <button class="btn btn-sm btn-danger" onclick="elimina(${p.id})"> Eliminar</button>
-        </div>
+preguntes.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'card shadow-sm';
+  div.innerHTML = `
+    <div class="card-body">
+      <strong>${p.question_text}</strong>
+      ${p.image ? `<div class="mt-2 mb-2"><img src="${p.image}" class="img-fluid" style="max-height:150px"></div>` : ''}
+      <hr>
+      ${p.answers.map((a,i) => `<div>${i}: ${a}${i===p.correct_index?' ✅':''}</div>`).join('')}
+      <div class="d-flex justify-content-end gap-2 mt-2">
+        <button class="btn btn-sm btn-warning" 
+          onclick='abrirModal(${p.id}, "${p.question_text.replace(/"/g,"&quot;")}", ${JSON.stringify(p.answers)}, ${p.correct_index}, "${p.image||""}")'>
+          Editar
+        </button>
+        <button class="btn btn-sm btn-danger" onclick="elimina(${p.id})">Eliminar</button>
       </div>
-    `;
-    container.appendChild(div);
-  });
+    </div>
+  `;
+  container.appendChild(div);
+});
+
 }
 
+// Subir imagen y crear pregunta
 async function crearPregunta() {
   const question = document.getElementById('novaPregunta').value;
   const answers = Array.from(document.querySelectorAll('#respostesInputs input')).map(i=>i.value);
   const correct = parseInt(document.getElementById('correcte').value);
+  const imgFile = document.getElementById('novaImagen').files[0];
+  let imagePath = '';
 
-  await fetch('api/creaPregunta.php', {
+  if (!question) {
+    alert("La pregunta no puede estar vacía");
+    return;
+  }
+  if (answers.some(a => a === "")) {
+    alert("Debes completar todas las respuestas");
+    return;
+  }
+  if (isNaN(correct) || correct < 0 || correct > 3) {
+    alert("El índice correcto debe estar entre 0 y 3");
+    return;
+  }
+  if (!imgFile) {
+    alert("Debes subir una imagen");
+    return;
+  }
+
+
+  // 1️⃣ Subir imagen primero
+  if (imgFile) {
+    const formData = new FormData();
+    formData.append("imagen", imgFile);
+    const res = await fetch('api/subirImagen.php', { method: 'POST', body: formData });
+    const data = await res.json();
+    if (data.status === 'ok') imagePath = data.path;
+  }
+
+  // 2️⃣ Crear la pregunta con la ruta de la imagen
+  const res2 = await fetch('api/creaPregunta.php', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({question, answers, correct})
+    body: JSON.stringify({question, answers, correct, image: imagePath})
   });
 
-  document.getElementById('novaPregunta').value='';
-  document.querySelectorAll('#respostesInputs input').forEach(i=>i.value='');
-  document.getElementById('correcte').value='';
-  carregarPreguntes();
+  const result = await res2.json();
+  if(result.status === 'ok'){
+      document.getElementById('novaPregunta').value='';
+      document.querySelectorAll('#respostesInputs input').forEach(i=>i.value='');
+      document.getElementById('correcte').value='';
+      document.getElementById('novaImagen').value='';
+      carregarPreguntes();
+  } else {
+      alert("Error al crear la pregunta");
+  }
 }
 
+
+// Eliminar pregunta
 async function elimina(id) {
   await fetch('api/eliminaPregunta.php', {
     method:'POST',
@@ -121,16 +166,19 @@ async function elimina(id) {
   carregarPreguntes();
 }
 
-function abrirModal(id, question, answers, correct) {
+// Abrir modal de edición con imagen
+function abrirModal(id, question, answers, correct, image) {
   editId = id;
   document.getElementById('editQuestion').value = question;
   document.getElementById('editAnswers').innerHTML =
     answers.map((a,i)=>`<input id="ea-${i}" class="form-control mb-1" type="text" value="${a}">`).join('');
   document.getElementById('editCorrect').value = correct;
+  document.getElementById('previewEdit').src = image || '';
   const modal = new bootstrap.Modal(document.getElementById('editModal'));
   modal.show();
 }
 
+// Guardar edición con imagen
 async function guardarEdicion() {
   const question = document.getElementById('editQuestion').value;
   const answers = [];
@@ -138,11 +186,21 @@ async function guardarEdicion() {
     answers.push(document.getElementById(`ea-${i}`).value);
   }
   const correct = parseInt(document.getElementById('editCorrect').value);
+  const imgFile = document.getElementById('editImagen').files[0];
+  let imagePath = document.getElementById('previewEdit').src;
+
+  if (imgFile) {
+    const formData = new FormData();
+    formData.append("imagen", imgFile);
+    const res = await fetch('api/subirImagen.php', { method: 'POST', body: formData });
+    const data = await res.json();
+    if (data.status === 'ok') imagePath = data.path;
+  }
 
   await fetch('api/editaPregunta.php', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({id: editId, question, answers, correct})
+    body: JSON.stringify({id: editId, question, answers, correct, image: imagePath})
   });
 
   bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();

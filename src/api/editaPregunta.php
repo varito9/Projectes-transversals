@@ -8,9 +8,14 @@ $id = intval($data['id']);
 $texto = mysqli_real_escape_string($conn, $data['question']);
 $answers = $data['answers'];
 $correct = intval($data['correct']);
+$imatge = isset($data['image']) ? mysqli_real_escape_string($conn, $data['image']) : null;
 
 // Actualizamos pregunta
-$sql = "UPDATE preguntes SET texto = '$texto' WHERE id = $id";
+if ($imatge !== null) {
+    $sql = "UPDATE preguntes SET texto = '$texto', imatge = '$imatge' WHERE id = $id";
+} else {
+    $sql = "UPDATE preguntes SET texto = '$texto' WHERE id = $id";
+}
 mysqli_query($conn, $sql);
 
 // Eliminamos respuestas viejas y creamos nuevas

@@ -2,12 +2,13 @@
 header("Content-Type: application/json");
 require_once "db.php";
 
+// Para recibir JSON + archivo, usamos $_FILES para la imagen
 $data = json_decode(file_get_contents("php://input"), true);
 
 $texto = mysqli_real_escape_string($conn, $data['question']);
-$imatge = ""; // opcional, ahora vacío
 $answers = $data['answers'];
 $correct = intval($data['correct']);
+$imatge = isset($data['image']) ? mysqli_real_escape_string($conn, $data['image']) : "";
 
 // Insertamos la pregunta
 $sql = "INSERT INTO preguntes (texto, imatge) VALUES ('$texto', '$imatge')";
