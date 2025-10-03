@@ -24,9 +24,12 @@
       <input type="text" class="form-control mb-2" placeholder="Resposta 2">
       <input type="text" class="form-control mb-2" placeholder="Resposta 3">
     </div>
-
     <label class="form-label">Índex correcte (0–3):</label>
     <input type="number" class="form-control w-25 mb-3" id="correcte" min="0" max="3">
+
+    <label class="form-label">Imatge</label>
+    <input type="file" class="form-control mb-3" id="novaImagen">
+
 
     <button class="btn btn-primary w-100" onclick="crearPregunta()"> Crear Pregunta</button>
   </section>
@@ -49,6 +52,13 @@
         <div id="editAnswers" class="mb-2"></div>
         <label>Índex correcte (0-3):</label>
         <input id="editCorrect" class="form-control w-25" type="number" min="0" max="3">
+
+        <label class="form-label">Imatge (opcional):</label>
+        <input type="file" class="form-control mb-3" id="editImagen">
+        <img id="previewEdit" src="" class="img-fluid mt-2" style="max-height:150px">
+
+
+
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

@@ -2,12 +2,19 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$env = parse_ini_file(__DIR__ . '/.env');
+//$env = parse_ini_file(__DIR__ . '/.env');
 
+/*
 $servername = $env['DB_HOST'];
 $username   = $env['DB_USER'];
 $password   = $env['DB_PASS'];
 $database   = $env['DB_NAME'];
+*/
+
+$servername = "db";
+$username   = "usuario";
+$password   = "password";
+$database   = "mi_bd";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
