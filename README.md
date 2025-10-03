@@ -5,7 +5,7 @@
 <a href="http://a24alvsalalvpr0.daw.inspedralbes.cat/src/" target="_blank">Projecte Banderes</a>
 
 <a href="http://a24alvsalalvpr0.daw.inspedralbes.cat/src/" target="_blank">
-  <img src="image/pro.png" alt="Captura de la app" width="400">
+  <img src="image/pro.png" alt="Captura de la app">
 </a>
 <h2>Objectiu</h2>
 
