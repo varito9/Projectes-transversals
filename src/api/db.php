@@ -7,12 +7,6 @@ $username = "a24alvsalalv_pr0";
 $password = "bD=G5X&[@(K5Fnmg";
 $database = "a24alvsalalv_pr0";
 
-
-// $servername = "db";
-// $username = "usuario";
-// $password = "password";
-// $database = "mi_bd";
-
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
