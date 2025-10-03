@@ -173,7 +173,7 @@ function enviarResultats() {
   document.getElementById("marcador").classList.add("hidden");
 
   // En producción cambiamos a /src/api/finalitza.php
-  fetch("/src/api/finalitza.php", {
+  fetch("./api/finalitza.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -248,7 +248,7 @@ function inicialitzarPartida(numPreguntes = 10) {
   document.getElementById("btnResultats").classList.add("hidden");
 
   // En producción cambiamos a /src/api/getPreguntes.php
-  fetch(`/src/api/getPreguntes.php?num=${numPreguntes}`)
+  fetch(`./api/getPreguntes.php?num=${numPreguntes}`)
     .then((response) => {
       if (!response.ok) throw new Error("Error al carregar preguntes");
       return response.json();
