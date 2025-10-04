@@ -28,11 +28,14 @@
 
 <a href="https://pr0-eight.vercel.app">Aplicació desplegada en Vercel aquí</a>
 
-0<h3>Sonar Qube</h3>
+<h3>Sonar Qube</h3>
 <p>Per comprobar l'estat del codi ja sigui per paràmetres de seguretat o parámetres de mantenibilitat i eficiencia s'ha utilitzat SonarQube </p>
   <img src="image/sonar.png" alt="Captura sonar">
 <h3>
-
+<hr>
+<h3>Flux de Treball</h3>
+<p>La gestió del codi s’ha fet amb GitHub, utilitzant commits  per a cada funcionalitat. El desplegament s’ha automatitzat a través de Vercel, assegurant que l’aplicació estigui disponible en un entorn de producció.</p>
+<hr>
 <div align="center">
 <h3>Aplicacions utilitzades per al projecte </h3> 
 
