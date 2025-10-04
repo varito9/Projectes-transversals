@@ -28,3 +28,23 @@
 
 <a href="https://pr0-eight.vercel.app">Aplicació desplegada en Vercel aquí</a>
 
+0<h3>Sonar Qube</h3>
+<p>Per comprobar l'estat del codi ja sigui per paràmetres de seguretat o parámetres de mantenibilitat i eficiencia s'ha utilitzat SonarQube </p>
+  <img src="image/sonar.png" alt="Captura sonar">
+<h3>
+
+<div align="center">
+<h3>Aplicacions utilitzades per al projecte </h3> 
+
+<a href="https://www.php.net/" target="_blank"> <img src="https://www.vectorlogo.zone/logos/php/php-icon.svg" alt="postman" width="45" height="45"/> </a> 
+    <a href="https://icons.getbootstrap.com/" target="_blank"> <img src="https://raw.githubusercontent.com/themedotid/bootstrap-icon/HEAD/docs/bootstrap-icon-css.png" alt="bootstrap" width="45" height="45"/> </a> 
+    <a href="https://www.w3.org/html/" target="_blank"> <img src="https://img.icons8.com/color/48/000000/html-5.png"/> </a> 
+    <a href="https://www.w3schools.com/css/" target="_blank"> <img src="https://img.icons8.com/color/48/000000/css3.png"/> </a> 
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://img.icons8.com/color/48/000000/javascript.png"/> </a> 
+    <a style="padding-right:8px;" href="https://www.mysql.com/" target="_blank"> <img src="https://img.icons8.com/fluent/50/000000/mysql-logo.png"/> </a>
+       <a href="https://code.visualstudio.com/" target="_blank"> <img src="https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-icon.svg" alt="vscode" width="45" height="45"/> </a>
+       <a href="https://www.docker.com/company/newsroom/media-resources/" target="_blank"> <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" alt="vscode" width="50" height="50"/> </a>
+
+
+
+</div>
