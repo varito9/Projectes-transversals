@@ -21,6 +21,13 @@ p.margen{
     text-align: center;
 }
 
+p.margen.subrayado{
+  display: inline-block; 
+  background-image: linear-gradient(to right, red, blue); 
+  background-size: 100% 3px; 
+  background-repeat: no-repeat;
+  background-position: 0 100%; 
+  padding-bottom: 2px; }
 h3.margen{
     margin-top: 3rem;
     text-align: center;
@@ -29,9 +36,35 @@ h3.margen{
 h3{
     margin-top: 2rem;
 }
-.resultat{
+
+.contenedor-resultats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultat {
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg,  #007bff  ,#ff0037 );
+    background-size: 200% 200%; /* clave para animación fluida */
     text-align: center;
     margin-top: 3rem;
+    font-size: 2.5rem;
+    color: #ffffff; /* dorado brillante */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        background-position: 0% 50%;
+
+    }
+    100% {
+      background-position: 100% 50%;
+    }
 }
 
 .margen-bandera{
@@ -198,6 +231,17 @@ button.resposta:disabled {
 
 
 #btnComençar {
+  transition-duration: 0.7s;
+  margin-top: 4rem;
+    background: linear-gradient(
+        135deg,
+        #520ff0,
+         #649be4
+      );
+}
+
+#btnComençar:hover {
+    padding: 1rem 3rem;
   margin-top: 4rem;
     background: linear-gradient(
         135deg,
@@ -289,9 +333,10 @@ h3.margen{
 }
 
 #formulariUsuari{
+  padding: 1rem 4rem;
   border-radius: 2rem;
      width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin-top: 5rem;
     background: linear-gradient(135deg, #1668e2, #14f1e6);
 }

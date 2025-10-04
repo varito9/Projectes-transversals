@@ -172,7 +172,7 @@ function enviarResultats() {
   document.getElementById("marcador").classList.add("hidden");
 
   // En producción cambiamos a /src/api/finalitza.php
-  fetch("/src/api/finalitza.php", {
+  fetch("/api/finalitza.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -192,10 +192,14 @@ function enviarResultats() {
 function mostrarResultats(resultats) {
   let contenidor = document.getElementById("partida");
   contenidor.innerHTML = `
-    <h2 class="resultat">Resultats</h2>
-    <p class="margen">Has encertat ${resultats.correctes} de ${resultats.total} preguntes.</p>
+    <div class="contenedor-resultats">
+      <h2 class="resultat">RESULTATS</h2>
+    </div>
+    <div class="contenedor-resultats">
+    <p class="margen fw-bold fs-5 subrayado">Has encertat ${resultats.correctes} de ${resultats.total} preguntes.</p>
+     </div>
     <div class="margen-boton"> <button id="reiniciar" class="">Tornar a jugar</button></div>
-  `;
+ `;
 
   let panel = document.getElementById("panelRespostes");
   let html = `<ul class="list-group">`;
@@ -247,7 +251,7 @@ function inicialitzarPartida(numPreguntes = 10) {
   document.getElementById("btnResultats").classList.add("hidden");
 
   // En producción cambiamos a /src/api/getPreguntes.php
-  fetch(`/src/api/getPreguntes.php?num=${numPreguntes}`)
+  fetch(`/api/getPreguntes.php?num=${numPreguntes}`)
     .then((response) => {
       if (!response.ok) throw new Error("Error al carregar preguntes");
       return response.json();
