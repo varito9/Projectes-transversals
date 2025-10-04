@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-// Carpeta donde se guardarán las imágenes
+// Carpeta on s'emmagatzemen les imatges pujades
 $targetDir = "../uploads/";
 if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
 

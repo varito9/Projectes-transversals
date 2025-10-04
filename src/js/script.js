@@ -100,7 +100,6 @@ function marcarRespuesta(numPregunta, numRespuesta) {
 
   estatDeLaPartida.contadorPreguntes++;
 
-  //https://github.com/alvaroph/tr0_daw
 
   actualitzarMarcador();
   actualizarPanel();
@@ -281,7 +280,6 @@ window.addEventListener("DOMContentLoaded", () => {
     enviarResultats();
   });
 
-  //Usuari
   document.getElementById("btnComençar").addEventListener("click", () => {
     const nom = document.getElementById("nomUsuari").value;
     if (nom) {
@@ -306,7 +304,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("panelRespostes").addEventListener("click", (event) => {
   if (event.target.classList.contains("irPregunta")) {
-    let num = parseInt(event.target.dataset.pregunta); // índice en array
+    let num = parseInt(event.target.dataset.pregunta);
     numPreguntaActual = num;
     renderPreguntaActual();
   }

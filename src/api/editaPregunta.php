@@ -10,7 +10,6 @@ $answers = $data['answers'];
 $correct = intval($data['correct']);
 $imatge = isset($data['image']) ? mysqli_real_escape_string($conn, $data['image']) : null;
 
-// Actualizamos pregunta
 if ($imatge !== null) {
     $sql = "UPDATE preguntes SET texto = '$texto', imatge = '$imatge' WHERE id = $id";
 } else {
@@ -18,7 +17,6 @@ if ($imatge !== null) {
 }
 mysqli_query($conn, $sql);
 
-// Eliminamos respuestas viejas y creamos nuevas
 mysqli_query($conn, "DELETE FROM respostes WHERE id_pregunta = $id");
 
 foreach ($answers as $i => $ans) {

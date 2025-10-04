@@ -127,7 +127,6 @@ async function crearPregunta() {
   }
 
 
-  // 1️⃣ Subir imagen primero
   if (imgFile) {
     const formData = new FormData();
     formData.append("imagen", imgFile);
@@ -136,7 +135,6 @@ async function crearPregunta() {
     if (data.status === 'ok') imagePath = data.path;
   }
 
-  // 2️⃣ Crear la pregunta con la ruta de la imagen
   const res2 = await fetch('api/creaPregunta.php', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
@@ -166,7 +164,7 @@ async function elimina(id) {
   carregarPreguntes();
 }
 
-// Abrir modal de edición con imagen
+// Abrir modal de Bootstrap
 function abrirModal(id, question, answers, correct, image) {
   editId = id;
   document.getElementById('editQuestion').value = question;
@@ -178,7 +176,7 @@ function abrirModal(id, question, answers, correct, image) {
   modal.show();
 }
 
-// Guardar edición con imagen
+// Guardar edició
 async function guardarEdicion() {
   const question = document.getElementById('editQuestion').value;
   const answers = [];
