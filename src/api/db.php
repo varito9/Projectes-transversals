@@ -10,11 +10,6 @@ $username   = $env['DB_USER'];
 $password   = $env['DB_PASS'];
 $database   = $env['DB_NAME'];
 
-// $servername = "db";
-// $username   = "usuario";
-// $password   = "password";
-// $database   = "mi_bd";
-
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
